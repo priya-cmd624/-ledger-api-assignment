@@ -126,6 +126,9 @@ def fetch():
         return jsonify(error="URL is not allowed"), 400
 
     try:
+# URL is restricted to HTTPS, an explicit hostname allowlist,
+# and validated against private, loopback, link-local and reserved IPs.
+# nosemgrep: python.flask.security.injection.ssrf-requests.ssrf-requests
         response = requests.get(
             url,
             timeout=5,
