@@ -60,7 +60,7 @@ jobs:
             --config p/python \
             --config p/security-audit \
             --error \
-            app/
+            task-2/app/
 
   dependency-scan:
     name: Trivy Dependency Scan
@@ -74,7 +74,7 @@ jobs:
         uses: aquasecurity/trivy-action@0.35.0
         with:
           scan-type: fs
-          scan-ref: .
+          scan-ref: task-2
           format: table
           severity: CRITICAL,HIGH
           ignore-unfixed: true
@@ -118,8 +118,8 @@ jobs:
       - name: Build image for scanning
         uses: docker/build-push-action@v6
         with:
-          context: .
-          file: task-1/hardened/Dockerfile
+          context: task-2
+          file: task-2/Dockerfile
           load: true
           push: false
           tags: ledger-api:scan
@@ -138,8 +138,8 @@ jobs:
         id: build
         uses: docker/build-push-action@v6
         with:
-          context: .
-          file: task-1/hardened/Dockerfile
+          context: task-2
+          file: task-2/Dockerfile
           push: true
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
