@@ -1,0 +1,169 @@
+Name:         require-run-as-non-root
+Namespace:    
+Labels:       <none>
+Annotations:  <none>
+API Version:  kyverno.io/v1
+Kind:         ClusterPolicy
+Metadata:
+  Creation Timestamp:  2026-07-22T11:17:03Z
+  Generation:          1
+  Resource Version:    6279
+  UID:                 191fbd59-f9f5-4514-93e5-5cd69ab1b111
+Spec:
+  Admission:     true
+  Background:    true
+  Emit Warning:  false
+  Rules:
+    Match:
+      Any:
+        Resources:
+          Kinds:
+            Pod
+    Name:                      require-run-as-non-root
+    Skip Background Requests:  true
+    Validate:
+      Allow Existing Violations:  true
+      Message:                    Containers must run as non-root.
+      Pattern:
+        Spec:
+          Security Context:
+            Run As Non Root:  true
+  Validation Failure Action:  Enforce
+Status:
+  Autogen:
+    Rules:
+      Match:
+        Any:
+          Resources:
+            Kinds:
+              apps/v1/DaemonSet
+              apps/v1/Deployment
+              batch/v1/Job
+              apps/v1/ReplicaSet
+              v1/ReplicationController
+              apps/v1/StatefulSet
+        Resources:
+      Name:                      autogen-require-run-as-non-root
+      Skip Background Requests:  true
+      Validate:
+        Allow Existing Violations:  true
+        Message:                    Containers must run as non-root.
+        Pattern:
+          Spec:
+            Template:
+              Spec:
+                Security Context:
+                  Run As Non Root:  true
+      Match:
+        Any:
+          Resources:
+            Kinds:
+              batch/v1/CronJob
+        Resources:
+      Name:                      autogen-cronjob-require-run-as-non-root
+      Skip Background Requests:  true
+      Validate:
+        Allow Existing Violations:  true
+        Message:                    Containers must run as non-root.
+        Pattern:
+          Spec:
+            Job Template:
+              Spec:
+                Template:
+                  Spec:
+                    Security Context:
+                      Run As Non Root:  true
+  Conditions:
+    Last Transition Time:  2026-07-22T11:17:03Z
+    Message:               Ready
+    Reason:                Succeeded
+    Status:                True
+    Type:                  Ready
+  Rulecount:
+    Generate:      0
+    Mutate:        0
+    Validate:      1
+    Verifyimages:  0
+  Validatingadmissionpolicy:
+    Generated:  false
+    Message:    skip generating ValidatingAdmissionPolicy for non CEL rules.
+Events:
+  Type     Reason           Age    From               Message
+  ----     ------           ----   ----               -------
+  Warning  PolicyViolation  3m28s  kyverno-scan       Pod kube-system/etcd-dodo-security-control-plane: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m28s  kyverno-scan       Pod kube-system/kube-scheduler-dodo-security-control-plane: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m28s  kyverno-scan       Pod local-path-storage/local-path-provisioner-7b8c8ddbd6-59g54: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m28s  kyverno-scan       Pod payments/curl-test: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Pod payments/reporting-684f6b9c8b-strnt: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Pod kube-system/coredns-66bc5c9577-p7pnz: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Pod kube-system/kindnet-4sr4p: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Pod kube-system/kube-proxy-2mmp9: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Pod kyverno/kyverno-reports-controller-666865d4d-tsvd4: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Pod kyverno/kyverno-admission-controller-6c596f64db-qtxsk: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Pod ingress-nginx/ingress-nginx-controller-f5784567-2mrzc: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Pod kube-system/coredns-66bc5c9577-kd2hm: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Pod kube-system/kindnet-9ksbc: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Pod kube-system/kube-apiserver-dodo-security-control-plane: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Pod kube-system/kube-controller-manager-dodo-security-control-plane: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Pod kube-system/kube-proxy-qk656: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Pod kyverno/kyverno-cleanup-controller-568ff47f67-2w59k: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Pod kyverno/kyverno-background-controller-65885d77db-h2s2k: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       DaemonSet kube-system/kindnet: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       DaemonSet kube-system/kube-proxy: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Deployment ingress-nginx/ingress-nginx-controller: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Deployment kyverno/kyverno-admission-controller: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Deployment kyverno/kyverno-cleanup-controller: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Deployment kyverno/kyverno-reports-controller: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Deployment payments/reporting: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Deployment local-path-storage/local-path-provisioner: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Deployment kyverno/kyverno-background-controller: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Deployment kube-system/coredns: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       ReplicaSet ingress-nginx/ingress-nginx-controller-f5784567: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       ReplicaSet kyverno/kyverno-admission-controller-6c596f64db: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       ReplicaSet kyverno/kyverno-cleanup-controller-568ff47f67: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       ReplicaSet payments/reporting-684f6b9c8b: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       ReplicaSet kube-system/coredns-66bc5c9577: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       ReplicaSet kyverno/kyverno-background-controller-65885d77db: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       ReplicaSet kyverno/kyverno-reports-controller-666865d4d: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       ReplicaSet local-path-storage/local-path-provisioner-7b8c8ddbd6: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       ReplicaSet payments/ledger-api-7cd8477dfc: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m27s  kyverno-scan       Pod kube-system/etcd-dodo-security-control-plane: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  3m10s  kyverno-admission  Deployment payments/ledger-api: [autogen-require-run-as-non-root] fail (blocked); validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m58s  kyverno-scan       Pod kyverno/kyverno-background-controller-65885d77db-h2s2k: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m58s  kyverno-scan       Pod kube-system/kube-scheduler-dodo-security-control-plane: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m58s  kyverno-scan       Pod kube-system/etcd-dodo-security-control-plane: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m58s  kyverno-scan       Pod payments/curl-test: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m58s  kyverno-scan       Pod local-path-storage/local-path-provisioner-7b8c8ddbd6-59g54: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m58s  kyverno-scan       Pod payments/reporting-684f6b9c8b-strnt: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Pod kube-system/coredns-66bc5c9577-p7pnz: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Pod kube-system/kindnet-4sr4p: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Pod kube-system/kube-proxy-2mmp9: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Pod kyverno/kyverno-admission-controller-6c596f64db-qtxsk: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Pod kyverno/kyverno-reports-controller-666865d4d-tsvd4: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Pod ingress-nginx/ingress-nginx-controller-f5784567-2mrzc: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Pod kube-system/coredns-66bc5c9577-kd2hm: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Pod kube-system/kindnet-9ksbc: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Pod kube-system/kube-apiserver-dodo-security-control-plane: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Pod kube-system/kube-controller-manager-dodo-security-control-plane: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Pod kube-system/kube-proxy-qk656: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Pod kyverno/kyverno-cleanup-controller-568ff47f67-2w59k: [require-run-as-non-root] fail; validation error: Containers must run as non-root. rule require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       DaemonSet kube-system/kindnet: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       DaemonSet kube-system/kube-proxy: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Deployment ingress-nginx/ingress-nginx-controller: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Deployment kyverno/kyverno-admission-controller: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Deployment kyverno/kyverno-cleanup-controller: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Deployment kyverno/kyverno-reports-controller: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Deployment local-path-storage/local-path-provisioner: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Deployment payments/reporting: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Deployment kube-system/coredns: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       Deployment kyverno/kyverno-background-controller: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       ReplicaSet kube-system/coredns-66bc5c9577: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       ReplicaSet kyverno/kyverno-background-controller-65885d77db: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       ReplicaSet kyverno/kyverno-reports-controller-666865d4d: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       ReplicaSet local-path-storage/local-path-provisioner-7b8c8ddbd6: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       ReplicaSet payments/ledger-api-7cd8477dfc: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       ReplicaSet ingress-nginx/ingress-nginx-controller-f5784567: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       ReplicaSet kyverno/kyverno-admission-controller-6c596f64db: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       ReplicaSet kyverno/kyverno-cleanup-controller-568ff47f67: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  2m57s  kyverno-scan       ReplicaSet payments/reporting-684f6b9c8b: [autogen-require-run-as-non-root] fail; validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/
+  Warning  PolicyViolation  35s    kyverno-admission  Deployment payments/ledger-api: [autogen-require-run-as-non-root] fail (blocked); validation error: Containers must run as non-root. rule autogen-require-run-as-non-root failed at path /spec/template/spec/securityContext/runAsNonRoot/

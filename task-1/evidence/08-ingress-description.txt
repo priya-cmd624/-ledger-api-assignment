@@ -1,0 +1,16 @@
+Name:             ledger-api-ingress
+Labels:           <none>
+Namespace:        payments
+Address:          
+Ingress Class:    nginx
+Default backend:  <default>
+Rules:
+  Host          Path  Backends
+  ----          ----  --------
+  ledger.local  
+                /   ledger-api:8080 (10.244.1.7:8080,10.244.1.8:8080,10.244.1.9:8080)
+Annotations:    nginx.ingress.kubernetes.io/ssl-redirect: false
+Events:
+  Type    Reason  Age   From                      Message
+  ----    ------  ----  ----                      -------
+  Normal  Sync    45s   nginx-ingress-controller  Scheduled for sync
