@@ -4,17 +4,13 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - "task-2/evidence/**"
-
   pull_request:
     branches:
       - main
-
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   packages: write
   id-token: write
   security-events: write
@@ -48,6 +44,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - name: Install Semgrep
         run: |
           python -m pip install --upgrade pip
@@ -70,7 +71,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Trivy filesystem scan
-        uses: aquasecurity/trivy-action@v0.35.0
+        uses: aquasecurity/trivy-action@0.35.0
         with:
           scan-type: fs
           scan-ref: .
@@ -78,8 +79,7 @@ jobs:
           severity: CRITICAL,HIGH
           ignore-unfixed: true
           exit-code: "1"
-          ignore-unfixed: true
-          exit-code: "1"
+
   build-scan-sign:
     name: Build, Scan, Sign and Attest
     runs-on: ubuntu-latest
@@ -125,7 +125,7 @@ jobs:
           tags: ledger-api:scan
 
       - name: Scan container image with Trivy
-        uses: aquasecurity/trivy-action@v0.35.0
+        uses: aquasecurity/trivy-action@0.35.0
         with:
           image-ref: ledger-api:scan
           format: table
@@ -145,6 +145,7 @@ jobs:
           labels: ${{ steps.metadata.outputs.labels }}
           provenance: true
           sbom: true
+
       - name: Install Cosign
         if: github.event_name != 'pull_request'
         uses: sigstore/cosign-installer@v3
@@ -157,43 +158,20 @@ jobs:
           cosign sign --yes \
             "${REGISTRY}/${IMAGE_NAME}@${DIGEST}"
 
-      - name: Create SLSA predicate
-        if: github.event_name != 'pull_request'
-        env:
-          DIGEST: ${{ steps.build.outputs.digest }}
-        run: |
-          cat > slsa-predicate.json <<EOF
-          {
-            "buildType": "https://github.com/Attestations/GitHubActionsWorkflow@v1",
-            "builder": {
-              "id": "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-            },
-            "subject": [
-              {
-                "name": "${REGISTRY}/${IMAGE_NAME}",
-                "digest": {
-                  "sha256": "${DIGEST#sha256:}"
-                }
-              }
-            ]
-          }
-          EOF
-
-      - name: Attest image
-        if: github.event_name != 'pull_request'
-        env:
-          DIGEST: ${{ steps.build.outputs.digest }}
-        run: |
-          cosign attest --yes \
-            --predicate slsa-predicate.json \
-            --type slsaprovenance \
-            "${REGISTRY}/${IMAGE_NAME}@${DIGEST}"
-
       - name: Verify signature
         if: github.event_name != 'pull_request'
         env:
           DIGEST: ${{ steps.build.outputs.digest }}
         run: |
           cosign verify \
-            --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
+            --certificate-identity-regexp="https://github.com/${GITHUB_REPOSITORY}/.github/workflows/build.yml@refs/heads/main" \
+            --certificate-oidc-issuer="https://token.actions.githubusercontent.com" \
             "${REGISTRY}/${IMAGE_NAME}@${DIGEST}"
+
+      - name: Create GitHub build provenance attestation
+        if: github.event_name != 'pull_request'
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          subject-digest: ${{ steps.build.outputs.digest }}
+          push-to-registry: true
