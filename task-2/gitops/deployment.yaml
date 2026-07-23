@@ -25,7 +25,8 @@ spec:
           type: RuntimeDefault
 
       containers:
-        - image: ghcr.io/priya-cmd624/ledger-api:1a9cd15
+        - name: ledger-api
+          image: ghcr.io/priya-cmd624/ledger-api:1a9cd15
           imagePullPolicy: IfNotPresent
 
           ports:
