@@ -1,0 +1,8 @@
+commit 1a9cd159926c8e25c374b23decc0e3cc84f0350e
+Author: priya-cmd624 <priyankabandela59@gmail.com>
+Date:   Wed Jul 22 16:53:41 2026 +0000
+
+    Document validated SSRF protection for Semgrep
+
+ task-2/app/app.py | 3 +++
+ 1 file changed, 3 insertions(+)

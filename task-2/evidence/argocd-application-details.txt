@@ -1,0 +1,53 @@
+Name:         ledger-api
+Namespace:    argocd
+Labels:       <none>
+Annotations:  <none>
+API Version:  argoproj.io/v1alpha1
+Kind:         Application
+Metadata:
+  Creation Timestamp:  2026-07-23T08:27:44Z
+  Generation:          2
+  Resource Version:    77418
+  UID:                 bb3e9884-92b4-4cbc-a2c3-91ee3efb5f01
+Spec:
+  Destination:
+    Namespace:  payments
+    Server:     https://kubernetes.default.svc
+  Project:      default
+  Source:
+    Path:             task-2/gitops
+    Repo URL:         https://github.com/priya-cmd624/ledger-api-assignment.git
+    Target Revision:  main
+  Sync Policy:
+    Automated:
+      Prune:      true
+      Self Heal:  true
+    Sync Options:
+      CreateNamespace=true
+Status:
+  Conditions:
+    Last Transition Time:  2026-07-23T08:27:44Z
+    Message:               Failed to load target state: failed to generate manifest for source 1 of 1: rpc error: code = Unknown desc = failed to list refs: authentication required: Repository not found.
+    Type:                  ComparisonError
+  Controller Namespace:    argocd
+  Health:
+    Last Transition Time:  2026-07-23T08:27:48Z
+    Status:                Healthy
+  Reconciled At:           2026-07-23T08:27:44Z
+  Resource Health Source:  appTree
+  Sync:
+    Compared To:
+      Destination:
+        Namespace:  payments
+        Server:     https://kubernetes.default.svc
+      Source:
+        Path:             task-2/gitops
+        Repo URL:         https://github.com/priya-cmd624/ledger-api-assignment.git
+        Target Revision:  main
+    Revision:             main
+    Status:               Unknown
+Events:
+  Type    Reason           Age   From                           Message
+  ----    ------           ----  ----                           -------
+  Normal  ResourceUpdated  25s   argocd-application-controller  Updated sync status:  -> Unknown
+  Normal  ResourceUpdated  25s   argocd-application-controller  Updated health status:  -> Healthy

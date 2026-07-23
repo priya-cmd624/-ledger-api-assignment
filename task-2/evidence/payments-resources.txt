@@ -1,0 +1,22 @@
+NAME                             READY   STATUS    RESTARTS      AGE
+pod/ledger-api-69cd776c6-bd4dt   2/2     Running   0             17m
+pod/ledger-api-69cd776c6-t8s67   2/2     Running   0             18m
+pod/ledger-api-69cd776c6-zmr9n   2/2     Running   0             17m
+pod/reporting-bc56f5ddb-jbr45    2/2     Running   4 (52m ago)   16h
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/ledger-api   ClusterIP   10.96.4.33   <none>        8080/TCP   23h
+
+NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/ledger-api   3/3     3            3           23h
+deployment.apps/reporting    1/1     1            1           23h
+
+NAME                                    DESIRED   CURRENT   READY   AGE
+replicaset.apps/ledger-api-69cd776c6    3         3         3       18m
+replicaset.apps/ledger-api-7cd8477dfc   0         0         0       23h
+replicaset.apps/ledger-api-8577656ccc   0         0         0       16h
+replicaset.apps/ledger-api-8599886546   0         0         0       23h
+replicaset.apps/reporting-684f6b9c8b    0         0         0       23h
+replicaset.apps/reporting-76d59cf87     0         0         0       16h
+replicaset.apps/reporting-bc56f5ddb     1         1         1       16h
+replicaset.apps/reporting-bf8d869c5     0         0         0       16h
