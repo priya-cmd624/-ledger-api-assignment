@@ -7,7 +7,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/priya-cmd624/ledger-api-assignment.git
+    repoURL: https://github.com/priya-cmd624/-ledger-api-assignment.git
     targetRevision: main
     path: task-2/gitops
 
