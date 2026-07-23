@@ -33,6 +33,9 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: ledger-api-config
 
           env:
             - name: STRIPE_API_KEY

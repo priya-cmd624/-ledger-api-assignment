@@ -1,0 +1,2 @@
+NAME                        POD-SELECTOR     AGE
+ledger-api-network-policy   app=ledger-api   6h54m

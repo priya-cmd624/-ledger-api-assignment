@@ -10,13 +10,18 @@ spec:
     - name: require-run-as-non-root
       match:
         any:
-        - resources:
-            kinds:
-            - Pod
+          - resources:
+              kinds:
+                - Pod
+
+      exclude:
+        any:
+          - resources:
+              namespaces:
+                - argocd
 
       validate:
         message: "Containers must run as non-root."
-
         pattern:
           spec:
             securityContext:

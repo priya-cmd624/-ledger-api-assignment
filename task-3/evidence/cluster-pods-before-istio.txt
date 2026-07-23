@@ -1,0 +1,22 @@
+NAMESPACE            NAME                                                  READY   STATUS      RESTARTS        AGE
+ingress-nginx        ingress-nginx-controller-f5784567-2mrzc               1/1     Running     1 (3m45s ago)   6h8m
+kube-system          coredns-66bc5c9577-kd2hm                              1/1     Running     1 (3m45s ago)   6h52m
+kube-system          coredns-66bc5c9577-p7pnz                              1/1     Running     1 (3m45s ago)   6h52m
+kube-system          etcd-dodo-security-control-plane                      1/1     Running     1 (3m45s ago)   6h53m
+kube-system          kindnet-4sr4p                                         1/1     Running     1 (3m45s ago)   6h52m
+kube-system          kindnet-9ksbc                                         1/1     Running     1 (3m45s ago)   6h52m
+kube-system          kube-apiserver-dodo-security-control-plane            1/1     Running     1 (3m45s ago)   6h53m
+kube-system          kube-controller-manager-dodo-security-control-plane   1/1     Running     1 (3m45s ago)   6h53m
+kube-system          kube-proxy-2mmp9                                      1/1     Running     1 (3m45s ago)   6h52m
+kube-system          kube-proxy-qk656                                      1/1     Running     1 (3m45s ago)   6h52m
+kube-system          kube-scheduler-dodo-security-control-plane            1/1     Running     1 (3m45s ago)   6h53m
+kyverno              kyverno-admission-controller-6c596f64db-qtxsk         1/1     Running     1 (3m45s ago)   6h3m
+kyverno              kyverno-background-controller-65885d77db-h2s2k        1/1     Running     1 (3m45s ago)   6h3m
+kyverno              kyverno-cleanup-controller-568ff47f67-2w59k           1/1     Running     1 (3m45s ago)   6h3m
+kyverno              kyverno-reports-controller-666865d4d-tsvd4            1/1     Running     1 (3m45s ago)   6h3m
+local-path-storage   local-path-provisioner-7b8c8ddbd6-59g54               1/1     Running     2 (3m8s ago)    6h52m
+payments             curl-test                                             0/1     Completed   0               6h41m
+payments             ledger-api-8599886546-g64rr                           1/1     Running     1 (3m45s ago)   6h18m
+payments             ledger-api-8599886546-n49j8                           1/1     Running     1 (3m45s ago)   6h18m
+payments             ledger-api-8599886546-whddd                           1/1     Running     1 (3m45s ago)   6h18m
+payments             reporting-684f6b9c8b-strnt                            1/1     Running     1 (3m45s ago)   6h43m

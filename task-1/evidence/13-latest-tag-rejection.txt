@@ -1,0 +1,10 @@
+Error from server: admission webhook "validate.kyverno.svc-fail" denied the request: 
+
+resource Pod/payments/latest-test was blocked due to the following policies 
+
+disallow-latest-tag:
+  require-explicit-image-tag: 'validation failure: Images must use an explicit tag
+    and must not use :latest.'
+require-run-as-non-root:
+  require-run-as-non-root: 'validation error: Containers must run as non-root. rule
+    require-run-as-non-root failed at path /spec/securityContext/runAsNonRoot/'

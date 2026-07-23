@@ -1,0 +1,3 @@
+NAME                          STATUS   ROLES           AGE     VERSION
+dodo-security-control-plane   Ready    control-plane   6h53m   v1.34.0
+dodo-security-worker          Ready    <none>          6h52m   v1.34.0
