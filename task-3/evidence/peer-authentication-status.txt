@@ -1,0 +1,2 @@
+NAMESPACE   NAME                   MODE     AGE
+payments    payments-strict-mtls   STRICT   16h

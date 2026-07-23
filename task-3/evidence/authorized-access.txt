@@ -1,0 +1,15 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   207  100   207    0     0  47872      0 --:--:-- --:--:-- --:--:-- 51750
+HTTP/1.1 404 Not Found
+server: envoy
+date: Thu, 23 Jul 2026 10:52:42 GMT
+content-type: text/html; charset=utf-8
+content-length: 207
+x-envoy-upstream-service-time: 1
+
+<!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
